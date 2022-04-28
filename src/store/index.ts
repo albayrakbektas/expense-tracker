@@ -1,15 +1,17 @@
 import {combineReducers} from "redux";
+import {UserState} from "../types/user";
+import UserReducer from "./reducers/userReducer";
 
-interface AppState {
-    user: any,
-    categories: any,
-    records: any
+export interface AppState {
+    user: UserState,
+    // categories: any,
+    // records: any
 }
 
 const rootReducer = combineReducers<AppState>({
-    user: () => {},
-    categories: () => {},
-    records: () => {}
+    user: UserReducer,
+    // categories: () => {},
+    // records: () => {}
 })
 
 export default rootReducer;
