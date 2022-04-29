@@ -6,10 +6,8 @@ interface PrivateRouteProps extends RouteProps {
 }
 
 function PrivateRoute({ component: Component, ...theRest }: PrivateRouteProps) {
-    const token = localStorage.getItem("token");
-  return (
-      token ? <Component /> : <Navigate to={"/login"} />
-  );
+  const token = localStorage.getItem("token");
+  return token ? <Component /> : <Navigate to={"/login"} />;
 }
 
 export default PrivateRoute;

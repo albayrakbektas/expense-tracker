@@ -1,7 +1,7 @@
-import {message} from "antd";
+import { message } from "antd";
 
 const showError = (errorMessage: string) => {
-    message.error(errorMessage);
+  message.error(errorMessage);
 };
 
 export default showError;

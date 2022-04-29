@@ -1,7 +1,7 @@
-import {message} from "antd";
+import { message } from "antd";
 
 const showSuccess = (successMessage: string) => {
-    message.success(successMessage);
+  message.success(successMessage);
 };
 
 export default showSuccess;

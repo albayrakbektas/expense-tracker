@@ -1,21 +1,21 @@
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import 'antd/dist/antd.css';
-import {applyMiddleware, createStore} from "redux";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "antd/dist/antd.css";
+import { applyMiddleware, createStore } from "redux";
 import rootReducer from "./store";
 import thunk from "redux-thunk";
-import {Provider} from "react-redux";
-import {BrowserRouter as Router} from "react-router-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
-    <Provider store={store}>
-        <Router>
-            <App />
-        </Router>
-    </Provider>
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
 );

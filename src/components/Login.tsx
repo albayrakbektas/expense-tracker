@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Button, Result } from "antd";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { LoginForm } from "../types/user";
 import { login } from "../store/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,17 +20,17 @@ function Login() {
   };
 
   useEffect(() => {
-      error && showError(error)
-  }, [error])
-
-    useEffect(() => {
-        data.username && showSuccess("You have successfully Logged in");
-    }, [data.username])
+    error && showError(error);
+  }, [error]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) navigate('/')
-  }, [data])
+    data.username && showSuccess("You have successfully Logged in");
+  }, [data.username]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) navigate("/");
+  }, [data]);
 
   return (
     <>

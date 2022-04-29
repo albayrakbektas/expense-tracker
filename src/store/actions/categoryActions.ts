@@ -11,12 +11,39 @@ export const getCategories = () => async (dispatch: CategoryDispatch) => {
   }
 };
 
-export const addCategories = (form: CategoryForm) => async (dispatch: CategoryDispatch) => {
-  dispatch({type: "ADD_CATEGORIES_START"})
-  try {
-    const response = await api.post<Category>("/categories", form)
-    dispatch({type: "ADD_CATEGORIES_SUCCESS", payload: response.data})
-  } catch {
-    dispatch({type: "ADD_CATEGORIES_ERROR"})
-  }
-}
+export const addCategories =
+  (form: CategoryForm) => async (dispatch: CategoryDispatch) => {
+    dispatch({ type: "ADD_CATEGORIES_START" });
+    try {
+      const response = await api.post<Category>("/categories", form);
+      dispatch({ type: "ADD_CATEGORIES_SUCCESS", payload: response.data });
+    } catch {
+      dispatch({ type: "ADD_CATEGORIES_ERROR" });
+    }
+  };
+
+export const updateCategory =
+  (form: Partial<CategoryForm>, categoryId: number) =>
+  async (dispatch: CategoryDispatch) => {
+    dispatch({ type: "UPDATE_CATEGORIES_START" });
+    try {
+      const response = await api.put<Category>(
+        `/categories/${categoryId}`,
+        form
+      );
+      dispatch({ type: "UPDATE_CATEGORIES_SUCCESS", payload: response.data });
+    } catch {
+      dispatch({ type: "UPDATE_CATEGORIES_ERROR" });
+    }
+  };
+
+export const deleteCategory =
+  (categoryId: number) => async (dispatch: CategoryDispatch) => {
+    dispatch({ type: "DELETE_CATEGORIES_START" });
+    try {
+      const response = await api.delete<Category>(`/categories/${categoryId}`);
+      dispatch({ type: "DELETE_CATEGORIES_SUCCESS", payload: categoryId });
+    } catch {
+      dispatch({ type: "DELETE_CATEGORIES_ERROR" });
+    }
+  };
