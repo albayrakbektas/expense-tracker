@@ -14,6 +14,12 @@ const categoryReducer = (state: CategoryState = defaultState, action: CategoryAc
             return {...state, loading: false, data: action.payload}
         case "GET_CATEGORIES_ERROR":
             return {...state, loading: false, error: "Error Fetching Categories"}
+        case "ADD_CATEGORIES_START":
+            return {...state, loading: true, error: ""}
+        case "ADD_CATEGORIES_SUCCESS":
+            return {...state, loading: false, data: [action.payload, ...state.data]}
+        case "ADD_CATEGORIES_ERROR":
+            return {...state, loading: false, error: "Error Adding Category"}
         default:
             return state
     }
