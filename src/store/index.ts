@@ -1,19 +1,21 @@
 import { combineReducers } from "redux";
 import { UserState } from "../types/user";
-import UserReducer from "./reducers/userReducer";
+import userReducer from "./reducers/userReducer";
 import { CategoryState } from "../types/category";
-import CategoryReducer from "./reducers/categoryReducer";
+import categoryReducer from "./reducers/categoryReducer";
+import {RecordState} from "../types/record";
+import recordReducer from "./reducers/recordReducer";
 
 export interface AppState {
   user: UserState;
   categories: CategoryState;
-  // records: any
+  records: RecordState
 }
 
 const rootReducer = combineReducers<AppState>({
-  user: UserReducer,
-  categories: CategoryReducer,
-  // records: () => {}
+  user: userReducer,
+  categories: categoryReducer,
+  records: recordReducer
 });
 
 export default rootReducer;

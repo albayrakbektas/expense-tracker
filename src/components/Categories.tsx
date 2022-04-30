@@ -9,9 +9,8 @@ import {
 } from "../store/actions/categoryActions";
 import { AppState } from "../store";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {Mode} from "../types/general";
 const { SketchPicker } = require("react-color");
-
-type Mode = "new" | "edit" | "delete";
 
 const emptyForm: CategoryForm = {
   name: "",
@@ -96,7 +95,7 @@ function Categories() {
 
   return (
     <React.Fragment>
-      <div style={{ textAlign: "right" }}>
+      <div style={{ textAlign: "right", marginBottom: "10px" }}>
         <Button type="primary" onClick={() => showModal("new")}>
           New Category
         </Button>
@@ -128,6 +127,7 @@ function Categories() {
                 <Select
                   placeholder="Select a option and change input text above"
                   defaultValue={form.type ? form.type : "expense"}
+                  value={form.type}
                   onChange={(value: any) => setForm({ ...form, type: value })}
                   allowClear
                 >
