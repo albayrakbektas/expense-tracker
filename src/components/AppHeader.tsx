@@ -31,7 +31,9 @@ function AppHeader() {
             </Menu.Item>
           </React.Fragment>
         ) : loading ? null : (
-          <Menu.Item key={"/login"}>Login</Menu.Item>
+          <Menu.Item key={"/login"}>
+              <Link to={'/login'}>Login</Link>
+          </Menu.Item>
         )}
       </Menu>
     </Header>

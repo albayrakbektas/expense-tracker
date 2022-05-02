@@ -13,7 +13,7 @@ function Login() {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const { data, loading, error } = useSelector((state: AppState) => state.user);
+  const { data, error } = useSelector((state: AppState) => state.user);
 
   const onFinish = (values: LoginForm) => {
     dispatch<any>(login(values));
