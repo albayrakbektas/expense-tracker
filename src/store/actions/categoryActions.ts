@@ -41,7 +41,7 @@ export const deleteCategory =
   (categoryId: number) => async (dispatch: CategoryDispatch) => {
     dispatch({ type: "DELETE_CATEGORIES_START" });
     try {
-      const response = await api.delete<Category>(`/categories/${categoryId}`);
+      await api.delete<Category>(`/categories/${categoryId}`);
       dispatch({ type: "DELETE_CATEGORIES_SUCCESS", payload: categoryId });
     } catch {
       dispatch({ type: "DELETE_CATEGORIES_ERROR" });

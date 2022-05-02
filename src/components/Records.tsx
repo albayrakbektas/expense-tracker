@@ -5,14 +5,14 @@ import { Button, Form, Input, Modal, Select, Space, Table, Tag } from "antd";
 import { Category } from "../types/category";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Record, RecordForm } from "../types/record";
-import {addRecord, getRecords} from "../store/actions/recordActions";
-import { SketchPicker } from "react-color";
-import { Mode } from "../types/general";
 import {
-  addCategories,
-  deleteCategory, getCategories,
-  updateCategory,
-} from "../store/actions/categoryActions";
+  addRecord,
+  getRecords,
+  updateRecord,
+  deleteRecord,
+} from "../store/actions/recordActions";
+import { Mode } from "../types/general";
+import { getCategories } from "../store/actions/categoryActions";
 
 const emptyForm: RecordForm = {
   title: "",
@@ -27,7 +27,7 @@ function Records() {
   const [updateId, setUpdateId] = useState<number | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
 
-  const { data, loading, error } = useSelector(
+  const { data, loading } = useSelector(
     (state: AppState) => state.records
   );
 
@@ -42,10 +42,10 @@ function Records() {
 
   const handleOk = () => {
     if (mode === "new") dispatch<any>(addRecord(form));
-    // else if (mode === "edit" && typeof updateId === "number")
-    //   dispatch<any>(updateRecord(form, updateId));
-    // else if (mode === "delete" && typeof deleteId === "number")
-    //   dispatch<any>(deleteRecord(deleteId));
+    else if (mode === "edit" && typeof updateId === "number")
+      dispatch<any>(updateRecord(form, updateId));
+    else if (mode === "delete" && typeof deleteId === "number")
+      dispatch<any>(deleteRecord(deleteId));
     setIsModalVisible(false);
     setMode("new");
     setForm(emptyForm);
@@ -62,7 +62,7 @@ function Records() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch<any>(getRecords());
-    !categories.length && dispatch<any>(getCategories())
+    !categories.length && dispatch<any>(getCategories());
   }, []);
 
   const columns = [
@@ -99,34 +99,41 @@ function Records() {
       dataIndex: "updatedAt",
       key: "updatedAt",
       render: (updatedAt: string, record: Record) => (
-          <>{new Date(updatedAt).toLocaleDateString()} {new Date(updatedAt).toLocaleTimeString(('tr-TR'), {
+        <>
+          {new Date(updatedAt).toLocaleDateString()}{" "}
+          {new Date(updatedAt).toLocaleTimeString("tr-TR", {
             hour: "2-digit",
-            minute: "2-digit"
-          })}</>
+            minute: "2-digit",
+          })}
+        </>
       ),
     },
     {
       title: "Action",
       key: "action",
-      render: (text: string, record: Record) => (
-        <Space size="middle">
-          <EditOutlined
-            style={{ cursor: "pointer", color: "#0390fc " }}
-            onClick={() => {
-              showModal("edit");
-              // setForm(record.id);
-              // setUpdateId(record.id);
-            }}
-          />
-          <DeleteOutlined
-            style={{ cursor: "pointer", color: "#c20808" }}
-            onClick={() => {
-              // showModal("delete");
-              // setDeleteId(category.id);
-            }}
-          />
-        </Space>
-      ),
+      render: (text: string, record: Record) => {
+      const {title, amount} = record
+        const category_id = record.category.id
+        return (
+            <Space size="middle">
+              <EditOutlined
+                  style={{ cursor: "pointer", color: "#0390fc " }}
+                  onClick={() => {
+                    showModal("edit");
+                    setForm({title, amount, category_id});
+                    setUpdateId(record.id);
+                  }}
+              />
+              <DeleteOutlined
+                  style={{ cursor: "pointer", color: "#c20808" }}
+                  onClick={() => {
+                    showModal("delete");
+                    setDeleteId(record.id);
+                  }}
+              />
+            </Space>
+        )
+      },
     },
   ];
 
@@ -139,7 +146,12 @@ function Records() {
   return (
     <React.Fragment>
       <div style={{ textAlign: "right", marginBottom: "10px" }}>
-        <Button type="primary" onClick={() => {showModal("new")}}>
+        <Button
+          type="primary"
+          onClick={() => {
+            showModal("new");
+          }}
+        >
           New Record
         </Button>
         <Modal
@@ -182,10 +194,12 @@ function Records() {
                   }
                   allowClear
                 >
-                  <Select.Option value={0} disabled>Select a category</Select.Option>
+                  <Select.Option value={0} disabled>
+                    Select a category
+                  </Select.Option>
                   {categories.map((category) => {
                     return (
-                      <Select.Option value={category.id}>
+                      <Select.Option value={category.id} key={category.id}>
                         {category.name}
                       </Select.Option>
                     );
@@ -198,7 +212,7 @@ function Records() {
           ) : null}
         </Modal>
       </div>
-      <Table loading={loading} columns={columns} dataSource={data} />
+      <Table loading={loading} columns={columns} dataSource={data} key={"id"} />
     </React.Fragment>
   );
 }
