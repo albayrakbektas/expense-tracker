@@ -7,7 +7,7 @@ import { AppState } from "../store";
 import { Link } from "react-router-dom";
 
 function AppHeader() {
-  const { data, loading, error } = useSelector((state: AppState) => state.user);
+  const { data, loading } = useSelector((state: AppState) => state.user);
 
   const dispatch = useDispatch();
   useEffect(() => {

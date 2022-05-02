@@ -29,7 +29,7 @@ function SignUp() {
   const onFinish = async (values: any) => {
     try {
       isLoading = true;
-      await api.post("/users/register", values);
+      await api().post("/users/register", values);
       isLoading = false;
       history("/login", { state: true });
     } catch (error) {
