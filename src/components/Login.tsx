@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Form, Input, Button, Result } from "antd";
-import { useLocation, useNavigate } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import { LoginForm } from "../types/user";
 import { login } from "../store/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -76,6 +76,10 @@ function Login() {
           </Button>
         </Form.Item>
       </Form>
+      <p style={{textAlign: "center"}}>
+        New to Expense Tracker? Please
+        <Link to={'/register'}> Sign up</Link>
+      </p>
     </>
   );
 }

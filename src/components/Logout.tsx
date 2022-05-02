@@ -12,11 +12,11 @@ function Logout() {
     dispatch<any>(logout());
   }, []);
 
-    console.log(data.username)
+  console.log(data.username);
 
   if (!data.username) {
-        return <Navigate to={"/login"} />;
-    }
+    return <Navigate to={"/login"} />;
+  }
 
   return <div>Logging out...</div>;
 }

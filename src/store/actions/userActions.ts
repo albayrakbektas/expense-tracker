@@ -1,4 +1,4 @@
-import {LoginForm, User, UserDispatch} from "../../types/user";
+import { LoginForm, User, UserDispatch } from "../../types/user";
 import api from "../../utils/api";
 
 export const login = (creds: LoginForm) => async (dispatch: UserDispatch) => {
@@ -13,16 +13,16 @@ export const login = (creds: LoginForm) => async (dispatch: UserDispatch) => {
 };
 
 export const isLoggedIn = () => async (dispatch: UserDispatch) => {
-  dispatch({type: "IS_LOGGED_IN_START"})
+  dispatch({ type: "IS_LOGGED_IN_START" });
   try {
-    const response = await api().post<User>("/users/is_logged_in")
-    dispatch({type: "IS_LOGGED_IN_SUCCESS", payload: response.data})
+    const response = await api().post<User>("/users/is_logged_in");
+    dispatch({ type: "IS_LOGGED_IN_SUCCESS", payload: response.data });
   } catch {
-    dispatch({type: "IS_LOGGED_IN_ERROR"})
+    dispatch({ type: "IS_LOGGED_IN_ERROR" });
   }
-}
+};
 
 export const logout = () => (dispatch: UserDispatch) => {
-  localStorage.removeItem("token")
-  dispatch({type: "LOGOUT"})
-}
+  localStorage.removeItem("token");
+  dispatch({ type: "LOGOUT" });
+};

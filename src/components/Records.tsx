@@ -27,9 +27,7 @@ function Records() {
   const [updateId, setUpdateId] = useState<number | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
 
-  const { data, loading } = useSelector(
-    (state: AppState) => state.records
-  );
+  const { data, loading } = useSelector((state: AppState) => state.records);
 
   const { data: categories } = useSelector(
     (state: AppState) => state.categories
@@ -112,27 +110,27 @@ function Records() {
       title: "Action",
       key: "action",
       render: (text: string, record: Record) => {
-      const {title, amount} = record
-        const category_id = record.category.id
+        const { title, amount } = record;
+        const category_id = record.category.id;
         return (
-            <Space size="middle">
-              <EditOutlined
-                  style={{ cursor: "pointer", color: "#0390fc " }}
-                  onClick={() => {
-                    showModal("edit");
-                    setForm({title, amount, category_id});
-                    setUpdateId(record.id);
-                  }}
-              />
-              <DeleteOutlined
-                  style={{ cursor: "pointer", color: "#c20808" }}
-                  onClick={() => {
-                    showModal("delete");
-                    setDeleteId(record.id);
-                  }}
-              />
-            </Space>
-        )
+          <Space size="middle">
+            <EditOutlined
+              style={{ cursor: "pointer", color: "#0390fc " }}
+              onClick={() => {
+                showModal("edit");
+                setForm({ title, amount, category_id });
+                setUpdateId(record.id);
+              }}
+            />
+            <DeleteOutlined
+              style={{ cursor: "pointer", color: "#c20808" }}
+              onClick={() => {
+                showModal("delete");
+                setDeleteId(record.id);
+              }}
+            />
+          </Space>
+        );
       },
     },
   ];

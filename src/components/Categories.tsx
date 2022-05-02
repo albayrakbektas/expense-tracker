@@ -3,13 +3,14 @@ import { Table, Tag, Button, Modal, Form, Select, Input, Space } from "antd";
 import { Category, CategoryForm } from "../types/category";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addCategories, deleteCategory,
+  addCategories,
+  deleteCategory,
   getCategories,
   updateCategory,
 } from "../store/actions/categoryActions";
 import { AppState } from "../store";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import {Mode} from "../types/general";
+import { Mode } from "../types/general";
 const { SketchPicker } = require("react-color");
 
 const emptyForm: CategoryForm = {
@@ -35,7 +36,7 @@ function Categories() {
     else if (mode === "edit" && typeof updateId === "number")
       dispatch<any>(updateCategory(form, updateId));
     else if (mode === "delete" && typeof deleteId === "number")
-      dispatch<any>(deleteCategory(deleteId))
+      dispatch<any>(deleteCategory(deleteId));
     setIsModalVisible(false);
     setMode("new");
     setForm(emptyForm);

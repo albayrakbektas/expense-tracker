@@ -26,13 +26,13 @@ function AppHeader() {
             <Menu.Item key={"/records"}>
               <Link to={"/records"}>Records</Link>
             </Menu.Item>
-            <Menu.Item key={"/logout"}>
+            <Menu.Item style={{ justifyItems: "end" }} key={"/logout"}>
               <Link to={"/logout"}>Logout</Link>
             </Menu.Item>
           </React.Fragment>
         ) : loading ? null : (
           <Menu.Item key={"/login"}>
-              <Link to={'/login'}>Login</Link>
+            <Link to={"/login"}>Login</Link>
           </Menu.Item>
         )}
       </Menu>
