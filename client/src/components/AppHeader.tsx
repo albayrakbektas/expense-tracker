@@ -26,8 +26,8 @@ function AppHeader() {
             <Menu.Item key={"/records"}>
               <Link to={"/records"}>Records</Link>
             </Menu.Item>
-            <Menu.Item style={{ justifyItems: "end" }} key={"/logout"}>
-              <Link to={"/logout"}>Logout</Link>
+            <Menu.Item key={"/logout"}>
+              <Link to={"/logout"} style={{ color: "#ffffff", fontWeight: "bold" }}>Logout</Link>
             </Menu.Item>
           </React.Fragment>
         ) : loading ? null : (
